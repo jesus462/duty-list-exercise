@@ -5,7 +5,7 @@ A full-stack web application for managing a TODO list of duties, built as a mono
 ## Project Structure
 
 ```
-nexplore-test/
+duty-list-exercise/
 └── backend/          # Node.js + TypeScript + Express + PostgreSQL
 ```
 
@@ -22,7 +22,7 @@ nexplore-test/
 
    ```bash
    git clone <repository-url>
-   cd nexplore-test
+   cd duty-list-exercise
    ```
 
 2. **Access the application**

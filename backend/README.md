@@ -16,7 +16,7 @@ Node.js backend API built with TypeScript, Express, and PostgreSQL for managing 
 
    ```bash
    git clone <repository-url>
-   cd nexplore-test
+   cd duty-list-exercise
    ```
 
 2. **Create environment file** (optional, defaults are provided)
