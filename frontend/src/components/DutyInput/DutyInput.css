@@ -1,9 +1,12 @@
-.duty-input {
-  max-width: 600px;
-  width: 100%;
+.duty-input-item {
+  margin-bottom: 0;
 }
 
-.duty-input .ant-input-group-addon button {
+.duty-input-item .ant-input {
+  padding-right: 120px;
+}
+
+.duty-input-item .ant-input-suffix button {
   display: flex;
   align-items: center;
   gap: 4px;

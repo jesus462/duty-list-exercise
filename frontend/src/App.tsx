@@ -2,14 +2,19 @@ import type { JSX } from "react";
 import { Layout, Typography } from "antd";
 import { DutyInput } from "./components/DutyInput/DutyInput";
 import { DutyList } from "./components/DutyList/DutyList";
+import { useAppHook } from "./hooks/useAppHook";
 import "./App.css";
 
 const { Header, Content } = Layout;
 const { Title, Paragraph } = Typography;
 
 const App = (): JSX.Element => {
+  const { duties, isLoading, isSubmitting, handleCreateDuty, contextHolder } =
+    useAppHook();
+
   return (
     <Layout className="app-layout">
+      {contextHolder}
       <Header className="app-header">
         <Title level={2} className="app-title">
           Duties List
@@ -21,13 +26,18 @@ const App = (): JSX.Element => {
             Add a new duty using the input below. Press Enter or click the
             button to add it.
           </Paragraph>
-          <DutyInput />
+          <DutyInput
+            isSubmitting={isSubmitting}
+            onSubmit={(value) => {
+              return handleCreateDuty(value);
+            }}
+          />
         </section>
         <section className="list-section">
           <Title level={4} className="list-title">
             Duties
           </Title>
-          <DutyList />
+          <DutyList duties={duties} isLoading={isLoading} />
         </section>
       </Content>
     </Layout>
