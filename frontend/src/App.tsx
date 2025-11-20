@@ -1,6 +1,6 @@
 import type { JSX } from "react";
 import { Layout, Typography } from "antd";
-import { DutyInput } from "./components/DutyInput/DutyInput";
+import { DutyInput } from "./components/DutyInput/creation/DutyInput";
 import { DutyList } from "./components/DutyList/DutyList";
 import { useAppHook } from "./hooks/useAppHook";
 import "./App.css";
@@ -9,8 +9,14 @@ const { Header, Content } = Layout;
 const { Title, Paragraph } = Typography;
 
 const App = (): JSX.Element => {
-  const { duties, isLoading, isSubmitting, handleCreateDuty, contextHolder } =
-    useAppHook();
+  const {
+    duties,
+    isLoading,
+    isSubmitting,
+    handleCreateDuty,
+    handleUpdateDuty,
+    contextHolder,
+  } = useAppHook();
 
   return (
     <Layout className="app-layout">
@@ -37,7 +43,12 @@ const App = (): JSX.Element => {
           <Title level={4} className="list-title">
             Duties
           </Title>
-          <DutyList duties={duties} isLoading={isLoading} />
+          <DutyList
+            duties={duties}
+            isLoading={isLoading}
+            isSubmitting={isSubmitting}
+            onUpdate={handleUpdateDuty}
+          />
         </section>
       </Content>
     </Layout>

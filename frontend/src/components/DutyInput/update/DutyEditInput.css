@@ -1,0 +1,19 @@
+.duty-edit-form {
+  width: 100%;
+  margin: 0;
+}
+
+.duty-edit-item {
+  width: 100%;
+  margin: 0;
+}
+
+.edit-action-button {
+  padding: 0;
+  min-width: auto;
+  height: auto;
+}
+
+.edit-action-button:hover {
+  background-color: transparent;
+}

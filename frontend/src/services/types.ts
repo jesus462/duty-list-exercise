@@ -6,3 +6,7 @@ export interface Duty {
 export interface CreateDutyRequest {
   name: string;
 }
+
+export interface UpdateDutyRequest {
+  name: string;
+}

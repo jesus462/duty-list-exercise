@@ -11,3 +11,16 @@ export interface DutyFormValues {
 export interface UseDutyInputParams {
   onSubmit: (value: string) => Promise<void> | void;
 }
+
+export interface DutyEditInputProps {
+  initialValue: string;
+  onSave: (value: string) => Promise<void> | void;
+  onCancel: () => void;
+  isSubmitting?: boolean;
+}
+
+export interface UseDutyEditInputParams {
+  initialValue: string;
+  onSubmit: (value: string) => Promise<void> | void;
+  onCancel: () => void;
+}

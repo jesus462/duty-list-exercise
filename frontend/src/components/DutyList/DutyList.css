@@ -14,3 +14,8 @@
 .action-icon:hover {
   color: #0958d9;
 }
+
+.action-icon:disabled {
+  color: #d9d9d9;
+  cursor: not-allowed;
+}

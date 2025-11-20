@@ -1,5 +1,5 @@
 import { API_BASE_URL } from "../utils/constants";
-import type { CreateDutyRequest, Duty } from "./types";
+import type { CreateDutyRequest, UpdateDutyRequest, Duty } from "./types";
 
 const handleResponse = async <T>(response: Response): Promise<T> => {
   if (!response.ok) {
@@ -30,6 +30,28 @@ export const fetchDuties = async (): Promise<Duty[]> => {
 export const createDuty = async (payload: CreateDutyRequest): Promise<Duty> => {
   const response = await fetch(`${API_BASE_URL}/duties`, {
     method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(payload),
+  });
+
+  return handleResponse<Duty>(response);
+};
+
+/**
+ * Updates an existing duty via the backend API
+ * @param id - The ID of the duty to update
+ * @param payload - Updated data for the duty
+ * @returns The updated duty
+ * @throws Error when the request fails
+ */
+export const updateDuty = async (
+  id: number,
+  payload: UpdateDutyRequest
+): Promise<Duty> => {
+  const response = await fetch(`${API_BASE_URL}/duties/${id}`, {
+    method: "PUT",
     headers: {
       "Content-Type": "application/json",
     },

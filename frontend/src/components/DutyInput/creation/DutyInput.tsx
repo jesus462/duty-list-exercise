@@ -1,9 +1,9 @@
 import type { JSX } from "react";
 import { Input, Button, Form } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
-import { DUTY_NAME_MAX_LENGTH } from "../../utils/constants";
-import { useDutyInput } from "./useDutyInput";
-import type { DutyInputProps } from "./types";
+import { DUTY_NAME_MAX_LENGTH } from "../../../utils/constants";
+import { useDutyInput } from "./useDutyInput.ts";
+import type { DutyInputProps } from "../types";
 import "./DutyInput.css";
 
 const { Item } = Form;

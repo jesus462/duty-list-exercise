@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { message } from "antd";
-import { fetchDuties, createDuty } from "../services/dutyService";
+import { fetchDuties, createDuty, updateDuty } from "../services/dutyService";
 import type { Duty } from "../services/types";
 
 export const useAppHook = () => {
@@ -45,11 +45,32 @@ export const useAppHook = () => {
     [messageApi]
   );
 
+  const handleUpdateDuty = useCallback(
+    async (id: number, name: string): Promise<void> => {
+      setIsSubmitting(true);
+      try {
+        const updatedDuty = await updateDuty(id, { name });
+        setDuties((prev) =>
+          prev.map((duty) => (duty.id === id ? updatedDuty : duty))
+        );
+        messageApi.success("Duty updated successfully.");
+      } catch (error) {
+        const err = error as Error;
+        console.error(err.message);
+        messageApi.error("Failed to update duty.");
+      } finally {
+        setIsSubmitting(false);
+      }
+    },
+    [messageApi]
+  );
+
   return {
     duties,
     isLoading,
     isSubmitting,
     handleCreateDuty,
+    handleUpdateDuty,
     contextHolder,
   };
 };
