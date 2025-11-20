@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useState } from "react";
 import { message } from "antd";
-import { fetchDuties, createDuty, updateDuty } from "../services/dutyService";
-import type { Duty } from "../services/types";
+import { fetchDuties, createDuty, updateDuty, deleteDuty } from "./dutyService";
+import type { Duty } from "./types";
 
-export const useAppHook = () => {
+export const useDutyServiceActions = () => {
   const [duties, setDuties] = useState<Duty[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
@@ -65,12 +65,31 @@ export const useAppHook = () => {
     [messageApi]
   );
 
+  const handleDeleteDuty = useCallback(
+    async (duty: Duty): Promise<void> => {
+      setIsSubmitting(true);
+      try {
+        await deleteDuty(duty.id);
+        setDuties((prev) => prev.filter((d) => d.id !== duty.id));
+        messageApi.success("Duty deleted successfully.");
+      } catch (error) {
+        const err = error as Error;
+        console.error(err.message);
+        messageApi.error("Failed to delete duty.");
+      } finally {
+        setIsSubmitting(false);
+      }
+    },
+    [messageApi]
+  );
+
   return {
     duties,
     isLoading,
     isSubmitting,
     handleCreateDuty,
     handleUpdateDuty,
+    handleDeleteDuty,
     contextHolder,
   };
 };

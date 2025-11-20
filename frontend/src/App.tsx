@@ -2,8 +2,8 @@ import type { JSX } from "react";
 import { Layout, Typography } from "antd";
 import { DutyInput } from "./components/DutyInput/creation/DutyInput";
 import { DutyList } from "./components/DutyList/DutyList";
-import { useAppHook } from "./hooks/useAppHook";
 import "./App.css";
+import { useDutyServiceActions } from "./services/useDutyServiceActions";
 
 const { Header, Content } = Layout;
 const { Title, Paragraph } = Typography;
@@ -15,8 +15,9 @@ const App = (): JSX.Element => {
     isSubmitting,
     handleCreateDuty,
     handleUpdateDuty,
+    handleDeleteDuty,
     contextHolder,
-  } = useAppHook();
+  } = useDutyServiceActions();
 
   return (
     <Layout className="app-layout">
@@ -48,6 +49,7 @@ const App = (): JSX.Element => {
             isLoading={isLoading}
             isSubmitting={isSubmitting}
             onUpdate={handleUpdateDuty}
+            onDelete={handleDeleteDuty}
           />
         </section>
       </Content>

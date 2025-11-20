@@ -60,3 +60,26 @@ export const updateDuty = async (
 
   return handleResponse<Duty>(response);
 };
+
+/**
+ * Deletes a duty via the backend API
+ * @param id - The ID of the duty to delete
+ * @throws Error when the request fails
+ */
+export const deleteDuty = async (id: number): Promise<void> => {
+  const response = await fetch(`${API_BASE_URL}/duties/${id}`, {
+    method: "DELETE",
+  });
+
+  if (!response.ok) {
+    const errorBody = await response.json().catch(() => null);
+    const message =
+      errorBody?.error || "Something went wrong. Please try again.";
+    throw new Error(message);
+  }
+
+  // DELETE returns 204 No Content, so no JSON to parse
+  if (response.status !== 204) {
+    throw new Error("Unexpected response from server");
+  }
+};
