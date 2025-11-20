@@ -5,6 +5,7 @@ import { errorHandler } from "./middleware/errorHandler";
 import { responseTimeMiddleware } from "./middleware/responseTime";
 import { setupControlledShutdown } from "./utils/setupControlledShutdown";
 import { setupDatabase } from "./utils/setupDatabase";
+import dutyRoutes from "./routes/duty.routes";
 
 dotenv.config();
 
@@ -19,6 +20,8 @@ app.use(responseTimeMiddleware);
 app.get("/health", (_req: express.Request, res: express.Response) => {
   res.status(200).json({ status: "ok", timestamp: new Date().toISOString() });
 });
+
+app.use("/api/duties", dutyRoutes);
 
 app.use(errorHandler);
 setupDatabase();
