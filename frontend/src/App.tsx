@@ -1,35 +1,37 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import type { JSX } from "react";
+import { Layout, Typography } from "antd";
+import { DutyInput } from "./components/DutyInput/DutyInput";
+import { DutyList } from "./components/DutyList/DutyList";
+import "./App.css";
 
-function App() {
-  const [count, setCount] = useState(0)
+const { Header, Content } = Layout;
+const { Title, Paragraph } = Typography;
 
+const App = (): JSX.Element => {
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <Layout className="app-layout">
+      <Header className="app-header">
+        <Title level={2} className="app-title">
+          Duties List
+        </Title>
+      </Header>
+      <Content className="app-content">
+        <section className="input-section">
+          <Paragraph className="input-description">
+            Add a new duty using the input below. Press Enter or click the
+            button to add it.
+          </Paragraph>
+          <DutyInput />
+        </section>
+        <section className="list-section">
+          <Title level={4} className="list-title">
+            Duties
+          </Title>
+          <DutyList />
+        </section>
+      </Content>
+    </Layout>
+  );
+};
 
-export default App
+export default App;

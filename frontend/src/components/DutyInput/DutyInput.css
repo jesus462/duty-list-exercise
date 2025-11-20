@@ -1,0 +1,10 @@
+.duty-input {
+  max-width: 600px;
+  width: 100%;
+}
+
+.duty-input .ant-input-group-addon button {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
