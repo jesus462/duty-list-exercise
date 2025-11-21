@@ -2,7 +2,7 @@ export default {
   preset: "ts-jest",
   testEnvironment: "jsdom",
   roots: ["<rootDir>/src"],
-  testMatch: ["**/tests/**/*.{ts,tsx}", "**/*.{test}.{ts,tsx}"],
+  testMatch: ["**/__tests__/**/*.{ts,tsx}", "**/*.{test}.{ts,tsx}"],
   moduleNameMapper: {
     "^@/(.*)$": "<rootDir>/src/$1",
     "\\.(css|less|scss|sass)$": "identity-obj-proxy",
@@ -28,6 +28,7 @@ export default {
       {
         tsconfig: {
           jsx: "react-jsx",
+          types: ["jest", "@testing-library/jest-dom"],
         },
       },
     ],

@@ -30,7 +30,15 @@ Node.js backend API built with TypeScript, Express, and PostgreSQL for managing 
 3. **Build and start services**
 
    ```bash
-   docker-compose up --build
+   cd backend
+   npm run docker:up
+   ```
+
+   Or using Docker Compose directly:
+
+   ```bash
+   cd backend
+   docker compose -f docker-compose.yml up --build
    ```
 
    This will:
@@ -84,12 +92,6 @@ Node.js backend API built with TypeScript, Express, and PostgreSQL for managing 
    npm run dev
    ```
 
-## API Endpoints
-
-### Health Check
-
-- **GET** `/health` - Check API status
-
 ## Scripts
 
 ### Build & Run
@@ -113,3 +115,71 @@ Node.js backend API built with TypeScript, Express, and PostgreSQL for managing 
 
 - `npm run docker:up` - Build and start all Docker services (PostgreSQL + Backend)
 - `npm run docker:down` - Stop and remove all Docker services and volumes
+
+## API Endpoints
+
+All endpoints are prefixed with `/api/duties`.
+
+### Get All Duties
+
+- **GET** `/api/duties`
+- **Response:** `200 OK`
+  ```json
+  [
+    { "id": 1, "name": "Duty 1" },
+    { "id": 2, "name": "Duty 2" }
+  ]
+  ```
+
+### Create Duty
+
+- **POST** `/api/duties`
+- **Request Body:**
+  ```json
+  { "name": "New Duty" }
+  ```
+- **Response:** `201 Created`
+  ```json
+  { "id": 3, "name": "New Duty" }
+  ```
+- **Validation:**
+  - `name` is required and must be a non-empty string
+  - `name` must be 255 characters or less
+  - Whitespace is automatically trimmed
+
+### Update Duty
+
+- **PUT** `/api/duties/:id`
+- **Request Body:**
+  ```json
+  { "name": "Updated Duty" }
+  ```
+- **Response:** `200 OK`
+  ```json
+  { "id": 1, "name": "Updated Duty" }
+  ```
+- **Error:** `404 Not Found` if duty doesn't exist
+- **Validation:** Same as create
+
+### Delete Duty
+
+- **DELETE** `/api/duties/:id`
+- **Response:** `204 No Content`
+- **Error:** `404 Not Found` if duty doesn't exist
+
+### Health Check
+
+- **GET** `/health`
+- **Response:** `200 OK`
+  ```json
+  { "status": "ok", "timestamp": "2024-01-01T00:00:00.000Z" }
+  ```
+
+## Technology Stack
+
+- **Node.js 20** - Runtime environment
+- **TypeScript** - Type safety (strict mode)
+- **Express** - Web framework
+- **PostgreSQL 15** - Database
+- **Jest** - Testing framework
+- **Docker** - Containerization
